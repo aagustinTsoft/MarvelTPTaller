@@ -34,7 +34,6 @@ class KtorCharactersRepository() : CharactersRepository {
                override fun log(message: String) {
                    Napier.v(tag = "Log de prueba", message = message)
                }
-
            }
        }
         install(JsonFeature){
