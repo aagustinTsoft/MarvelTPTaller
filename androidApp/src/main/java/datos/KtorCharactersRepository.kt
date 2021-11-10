@@ -12,6 +12,7 @@ import io.ktor.client.features.logging.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.client.features.json.JsonFeature
+import io.ktor.http.*
 
 class KtorCharactersRepository2(private val apiClient: MarvelCharactersClient) : CharactersRepository {
 
@@ -43,6 +44,9 @@ class KtorCharactersRepository() : CharactersRepository {
     }
 
     override suspend fun getCharacters(timestamp: Long, md5: String): List<Character> {
-        return httpClient.get("https://gateway.marvel.com/v1/public/characters")
+        return httpClient.get("https://gateway.marvel.com/v1/public/characters"){
+            parameter("ts",timestamp)
+            parameter("hash",md5)
+        }
     }
 }
